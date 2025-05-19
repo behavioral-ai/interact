@@ -1,7 +1,6 @@
 package operations
 
 import (
-	"github.com/behavioral-ai/collective/namespace"
 	"github.com/behavioral-ai/collective/repository"
 	"github.com/behavioral-ai/core/messaging"
 )
@@ -21,8 +20,7 @@ func init() {
 	repository.RegisterConstructor(NamespaceName, func() messaging.Agent {
 		return newAgent()
 	})
-	////agents.Register(resource.NewAgent())
-	agents.Register(namespace.NewAgent())
+
 }
 
 func newAgent() *agentT {
@@ -41,7 +39,7 @@ func (a *agentT) Message(m *messaging.Message) {
 	if m == nil {
 		return
 	}
-	
+
 	if m.Event() == messaging.ShutdownEvent {
 		agents.Broadcast(m)
 	}
